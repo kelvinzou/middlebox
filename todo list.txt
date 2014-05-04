@@ -1,0 +1,21 @@
+All
+==========
+1. Different (convex?) functions as objective function
+2. Link/Node assignments
+. Complex cost functions
+
+
+Kelvin
+==========
+1. Prove multitasking DAG-ordered LP is correct (kinda done)
+2. Prove combinatorial algorithm converges to global opt (in progress…)
+3. Robust optimization (Done)
+
+
+
+Yonatan
+==========
+1. Multiplicative weights algorithm for flows
+2. Work on directed version of problem (circulation-based?)
+3. Inapproximable variants
+4. Check dag-ordered case

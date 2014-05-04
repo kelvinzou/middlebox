@@ -1,0 +1,54 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: draft.aux
+The style file: acm.bst
+Database file #1: references.bib
+Warning--entry type for "openvswitch" isn't style-file defined
+--line 242 of file references.bib
+Warning--entry type for "SecurityMarketResearch" isn't style-file defined
+--line 249 of file references.bib
+Warning--to sort, need author or key in SecurityMarketResearch
+Warning--to sort, need author or key in openvswitch
+Warning--empty year in FordFulkerson
+You've used 13 entries,
+            2253 wiz_defined-function locations,
+            615 strings with 6780 characters,
+and the built_in function-call counts, 5661 in all, are:
+= -- 541
+> -- 279
+< -- 0
++ -- 116
+- -- 102
+* -- 457
+:= -- 843
+add.period$ -- 35
+call.type$ -- 13
+change.case$ -- 88
+chr.to.int$ -- 0
+cite$ -- 16
+duplicate$ -- 222
+empty$ -- 453
+format.name$ -- 102
+if$ -- 1221
+int.to.chr$ -- 0
+int.to.str$ -- 13
+missing$ -- 11
+newline$ -- 64
+num.names$ -- 22
+pop$ -- 115
+preamble$ -- 1
+purify$ -- 77
+quote$ -- 0
+skip$ -- 164
+stack$ -- 0
+substring$ -- 371
+swap$ -- 78
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 52
+warning$ -- 3
+while$ -- 51
+width$ -- 15
+write$ -- 136
+(There were 5 warnings)
