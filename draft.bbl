@@ -1,8 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{SecurityMarketResearch}
-\url{http://www.abiresearch.com/market-research/product/1006059-world-enterprise-network-and-data-security}.
-
 \bibitem{openvswitch}
 \url{http://openvswitch.org}.
 
@@ -17,28 +14,19 @@
 \newblock Flowtags: Enforcing network-wide policies in the presence of dynamic
   middlebox actions.
 \newblock In {\em Proceedings of the Second ACM SIGCOMM Workshop on Hot Topics
-  in Software Defined Networking\/} (New York, NY, USA, 2013), HotSDN '13, ACM,
-  pp.~19--24.
+  in Software Defined Networking\/} (2013), HotSDN '13, ACM, pp.~19--24.
 
 \bibitem{FordFulkerson}
 {\sc Ford, L.~R., and Fulkerson, D.~R.}
 \newblock {Maximal Flow through a Network.}
 \newblock {\em Canadian Journal of Mathematics 8\/}, 399--404.
 
-\bibitem{infocom2000}
-{\sc Fortz, B., and Thorup, M.}
-\newblock Internet traffic engineering by optimizing ospf weights.
-\newblock In {\em INFOCOM 2000. Nineteenth Annual Joint Conference of the IEEE
-  Computer and Communications Societies. Proceedings. IEEE\/} (2000), vol.~2,
-  pp.~519--528 vol.2.
-
 \bibitem{clickos}
 {\sc Martins, J., Ahmed, M., Raiciu, C., Olteanu, V., Honda, M., Bifulco, R.,
   and Huici, F.}
 \newblock Clickos and the art of network function virtualization.
 \newblock In {\em 11th USENIX Symposium on Networked Systems Design and
-  Implementation (NSDI 14)\/} (Seattle, WA, Apr. 2014), USENIX Association,
-  pp.~459--473.
+  Implementation (NSDI 14)\/} (Apr. 2014), USENIX Association, pp.~459--473.
 
 \bibitem{Mogul1997}
 {\sc Mogul, J.~C., Douglis, F., Feldmann, A., and Krishnamurthy, B.}
@@ -50,20 +38,19 @@
   Kern, R., Kumar, H., Zikos, M., Wu, H., Kim, C., and Karri, N.}
 \newblock Ananta: Cloud scale load balancing.
 \newblock In {\em Proceedings of the ACM SIGCOMM 2013 Conference on SIGCOMM\/}
-  (New York, NY, USA, 2013), SIGCOMM '13, ACM, pp.~207--218.
+  (2013), SIGCOMM '13, ACM, pp.~207--218.
 
 \bibitem{SIMPLE2013}
 {\sc Qazi, Z.~A., Tu, C.-C., Chiang, L., Miao, R., Sekar, V., and Yu, M.}
 \newblock Simple-fying middlebox policy enforcement using sdn.
 \newblock In {\em Proceedings of the ACM SIGCOMM 2013 Conference on SIGCOMM\/}
-  (New York, NY, USA, 2013), SIGCOMM '13, ACM, pp.~27--38.
+  (2013), SIGCOMM '13, ACM, pp.~27--38.
 
 \bibitem{COMB2012}
 {\sc Sekar, V., Egi, N., Ratnasamy, S., Reiter, M.~K., and Shi, G.}
 \newblock Design and implementation of a consolidated middlebox architecture.
 \newblock In {\em Proceedings of the 9th USENIX Conference on Networked Systems
-  Design and Implementation\/} (Berkeley, CA, USA, 2012), NSDI'12, USENIX
-  Association, pp.~24--24.
+  Design and Implementation\/} (2012), NSDI'12, USENIX Association, pp.~24--24.
 
 \bibitem{APLOMB2012}
 {\sc Sherry, J., Hasan, S., Scott, C., Krishnamurthy, A., Ratnasamy, S., and
@@ -72,13 +59,19 @@
   cloud service.
 \newblock In {\em Proceedings of the ACM SIGCOMM 2012 Conference on
   Applications, Technologies, Architectures, and Protocols for Computer
-  Communication\/} (New York, NY, USA, 2012), SIGCOMM '12, ACM, pp.~13--24.
+  Communication\/} (2012), SIGCOMM '12, ACM, pp.~13--24.
 
 \bibitem{Wayne1999}
 {\sc Wayne, K.~D.}
 \newblock A polynomial combinatorial algorithm for generalized minimum cost
   flow.
 \newblock In {\em Proceedings of the Thirty-first Annual ACM Symposium on
-  Theory of Computing\/} (New York, NY, USA, 1999), STOC '99, ACM, pp.~11--18.
+  Theory of Computing\/} (1999), STOC '99, ACM, pp.~11--18.
+
+\bibitem{InteriorPoint}
+{\sc Wright, M.~H.}
+\newblock The interior-point revolution in optimization: history, recent
+  developments, and lasting consequences.
+\newblock {\em Bull. Amer. Math. Soc. (N.S 42\/} (2005), 39--56.
 
 \end{thebibliography}

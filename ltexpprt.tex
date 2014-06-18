@@ -8,6 +8,7 @@
 \usepackage{cite}
 \usepackage{verbatim}
 \usepackage{graphicx}
+
 \begin{document}
 \title{\Large  Joint Optimization of Routing and Node Selection}
 %\thanks{Supported by .} 
@@ -32,6 +33,8 @@ paper, outlining the purposes and goals I am trying to address.\end{abstract}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%                         Intro                                 %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
  \section{Problem formulation} In this paper, we introduce a network flow model. If we review the network abstraction, it is essentially composed of nodes, links and flows. However the model is missing one important piece for networking. Network flows are not simply just like water, a lot of processing work are carried via flows and need to be done before the flow reaches destination. What if flow needs to be processed at some node along the path? What is more interesting is that due to the fact that each node has a certain processing capacity, we cannot actually handle the flow at a single node, but instead they are handled at different nodes, saying we can handle half at the first hop and the other half at the second node. This essentially leads to an interesting graph model: we have a graph G(V, E), with both link bandwidth \textbf{B}(e)where $e \in E(u,v)$ and node capacity \textbf{C}(v)where $v \in V $, and we are trying to fill in traffic demand with both traffic rate demand \textbf{R}(src, dest) and computational work demand \textbf{D}(src, dest). \textbf{R}(src, dest) should be correlated to \textbf{D}(src, dest). Throughout the whole paper, we assume linear relation $q_i = \frac{D}{R}$ for each flow $ i_{src,dst} $right now, which covers most cases, since most workload processing is per packet based. The system can achieve a joint optimal outcome for both routing and node workload allocation usage by coupling routing problem to processing resource placement and processing resource allocation problem.  
  
@@ -478,8 +481,8 @@ For each path we also have:
 $w(e) =$ 
 $ \sum\limits_{\pi\in P: e'\in \pi, e' \leq e} w(\pi, e')\leq \sum\limits_{\pi\in P: e\in \pi} f(\pi) = f(e).  $\newline
 \end{proof}
-\fbox{ \includegraphics[scale=0.63]{algo1.png} }
-\fbox{ \includegraphics[scale=0.63]{algo2.png}}
+%\fbox{ \includegraphics[scale=0.63]{algo1.png} }
+%\fbox{ \includegraphics[scale=0.63]{algo2.png}}
    
 Next we focus on proof for \textbf{\textit{Direction B}}.
 
@@ -569,8 +572,8 @@ Again we introduce some intermediate variable p for each node, $p_v: $ workload 
 \newline
 $p_v = \sum\limits_{e \in E_{u, v} } f^1(e) - \sum\limits_{e \in E_{v, w} } f^1(e)  $ .
 \newline
-\fbox{ \includegraphics[scale=0.60]{algo3.png} }
-\fbox{ \includegraphics[scale=0.62]{algo4.png}}
+%\fbox{ \includegraphics[scale=0.60]{algo3.png} }
+%\fbox{ \includegraphics[scale=0.62]{algo4.png}}
    
 The proof for showing this is feasible in path-based solution from an edge-based solution is similar to proof above. 
 Again we can verify that we can always ensure some path with non-zero flow from source to sink, and also all the constraints are conserved after peeling off some path. 
@@ -677,7 +680,7 @@ Since $f^1$ is always decreasing while $f^3$ is always increasing, so incoming e
 \end{proof}
 
 Here we introduce two intermediate variables $\rho_1 = \frac{f^1} {f^1+f^2+f^3}$ and $\rho_3 = \frac{f^3} {f^1+f^2+f^3}$ for each edge. 
-\fbox{ \includegraphics[scale=0.64]{algo5.png} }
+%\fbox{ \includegraphics[scale=0.64]{algo5.png} }
 \begin{lemma}
 Path construction always give us non zero path from source to destination. 
 \end{lemma}
@@ -686,7 +689,7 @@ First case if at node v where $p_a(v)>0$, $p_b(v)$ is also non zero, or in other
 
 Second case if at node v where $p_a(v)>0$, $p_b(v)=0$, so we must have $f^2>0$ coming out from node v, and if we keep picking $f^2>0$ via BFS, we will find some node v' where $p_b(v')>0$, we can again disqualify the existence of cycles where $f^2>0$ from outgoing edges in the cycle by flow cancellation. Once we find the node v', the rest is the same as above.  
 \end{proof}
-\fbox{ \includegraphics[scale=0.64]{algo6.png} }
+%\fbox{ \includegraphics[scale=0.64]{algo6.png} }
 
 Again here is not hard to find that all the constraints are preserved after flow placement, so the algorithm will keep peeling off flow from edge based solution and construct paths, until no $p_a(v) $ left, which also means no $p_b(v)$ left. 
 %%%%%%%%%                                        Parallel                  %%%%%%%%%%%%%%%%%%%%%
