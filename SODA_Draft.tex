@@ -6,27 +6,39 @@
 
 \usepackage{ltexpprt} 
 
-\begin{document}
 \title{Multi-Commodity Flow with In-Network Processing}
-%\thanks{Supported by .} 
-\author[]{Moses Charikar}
-\author[]{Yonatan Naamad}
-\author[]{Jennifer Rexford}
-\author[]{X. Kelvin Zou}
-\affil[]{Department of Computer Science, Princeton University}
-\affil[ ]{\textit {\{moses,ynaamad,jrex, xuanz\}@cs.princeton.edu}}
+\author{Moses Charikar, Yonatan Naamad, Jennifer Rexford, and X. Kelvin Zou\\
+Department of Computer Science, Princeton University\\
+\texttt{\{moses,ynaamad,jrex,xuanz\}@cs.princeton.edu}}
 \date{}
+
+\begin{document}
 \maketitle
+\thispagestyle{empty}
 
 \section{Introduction}
-\subsection{Background}
-Networks have evolved beyond a simple packet forwarding. Many types of in-network flow processing are ubiquitous today. The flow processing usually take place at vertices, in which we install one or a few appliances, so called middleboxes(MBoxes), examples including firewall, encryption and compression. In many cases the flow has to go through a sequence of MBox processing in order to fulfill the function or security requirements. 
+%%%
+%%% Middleboxes are important
+%%%
+In addition to delivering data efficiently, today's computer networks often perform services on the traffic in flight to enhance security, privacy, or performance, or provide new features.  Network administrators frequently install so-called ``middleboxes'' such as firewalls, network address translators, server load balancers, Web caches, video transcoders, and devices that compress or encrypt the traffic.  In fact, many networks have as many middleboxes as they do underlying routers or switches.  Often a single conversation, or \emph{connection}, must traverse multiple middleboxes, and different connections may go through different sequences of middleboxes.  For example, while Web traffic may go through a firewall followed by a server load balancer, video traffic may simply go through a transcoder.  In some cases, the traffic volume is so high that an organization needs to run multiple instances of the same middlebox to keep up with the demand.  Deciding how many middleboxes to run, where to place them, and how to direct traffic through them is a major challenge facing network administrators.
 
-Traditionally, these MBoxes use specialized hardware and are installed at predetermined locations(vertices). In terms of the locations, some design places MBoxes at juncture points(e.g., gateways) in special network topologies such as FatTree\cite{FATTREE}, but it leads to inefficient routing in cases where the both source and sink are sharing the same predecessors. It also fails to cover generalized networks or enforce the policy for a sequence of MBoxes.
+%%%
+%%% Dedicated appliances stink
+%%%
+Until recently, each middlebox was a dedicated appliance, consisting of both software and hardware.  Administrators tended to install these appliances at critical locations that naturally see most of the traffic, such as the gateway connecting a campus or company to the rest of the Internet.  A network could easily have a long chain of these appliances at one location, forcing all connections to traverse every appliance---whether they need all of the services or not.  In addition, placing middleboxes only at the gateway does not serve the organization's many \emph{internal} connections, unless the internal traffic is routed circuitously through the gateway.
+%
+%%%
+%%% Network Function Virtualization
+%%%
+Over the last few years, middleboxes are increasingly \emph{virtualized}, with the software service separate from the physical hardware.  Middleboxes now run as virtual machines that can easily spin up (or down) on any physical server, as needed.  This has led to a growing interest in good algorithms that optimize the (i) \emph{placement} of middleboxes over a pool of server resources, (ii) \emph{steering} of traffic through a suitable sequence of middleboxes based on a high-level policy, and (iii) \emph{routing} of the traffic between the servers over efficient network paths~\cite{SIMPLE2013}.
 
-The recent development of MBox virtualization enables more flexible deployment. MBoxes are no longer hardware dependent and can be spin up(or down) at any physical server\cite{clickos, ANANTA2013}. In this new architecture, the processing capacities are homogeneous and the problem becomes simply where to place MBox servers. There are two choices: 1. separate the server placement and routing decision: place MBox servers first and make routing decisions based on MBox locations\cite{SIMPLE2013}; 2. have a joint optimization scheme where the server locations are decided based on potential routing decisions given the flow demand. We argue that the latter is better in terms of efficiency but imposes the hardness for the server placement. 
+%%%
+%%% Combining the optimization problems
+%%%
+Rather than solving these three optimization problems separately, we introduce---and solve---a joint optimization problem.  Since server resources are fungible, we argue that each compute node could subdivide its resources arbitrarily across any of the middlebox functions, as needed.  That is, the \emph{placement} problem is more naturally a question of what fraction of each node's computational (or memory) resources to allocate to each middlebox function.  Similarly, each connection can have its middlebox processing performed on any node, or set of nodes, that have sufficient resources.  That is, the \emph{steering} problem is more naturally a question of how to decide which nodes should devote a share of its processing resources to a particular portion of the traffic.  Hence, the joint optimization problem ultimately devolves to a new kind of \emph{routing} problem, where we must compute paths through the network based on both the bandwidth and processing requirements of the traffic between each source-sink pair.  That is, a flow from source to sink must be allocated (i) a certain amount of bandwidth on every link in its path and (ii) a total amount of computation across all of the nodes in its path.
+
 \subsection{The Problem}
-We can abstract the flow in-network process problem in the following way: there is a flow demand with multi-sources and multi-sinks, and each flow requires a certain amount of in-network (MBox) processing. The in-network processing required for a flow is proportional to the flow size and without losing generality, we assume one unit of flow requires one unit of processing. For a flow from a source to a sink, we assume it is an aggregate flow so the routing and in-network processing for a flow are both divisible. In this model there are two types of constraints: edge capacity and vertex capacity, which represents bandwidth and MBox processing capacity. A feasible flow pattern satisfies: the sum of flows on each edge is bounde by the edge capacity, the sum of in-network process done at each vertex is bounded by the vertex capacity, and the processing done at all vertices for a flow should be equal to flow size and the processing has to be carried out by the flow.
+We can abstract the flow in-network process problem in the following way: there is a flow demand with multi-sources and multi-sinks, and each flow requires a certain amount of in-network (MBox) processing. The in-network processing required for a flow is proportional to the flow size and without losing generality, we assume one unit of flow requires one unit of processing. For a flow from a source to a sink, we assume it is an aggregate flow so the routing and in-network processing for a flow are both divisible. In this model there are two types of constraints: edge capacity and vertex capacity, which represents bandwidth and MBox processing capacity. A feasible flow pattern satisfies: the sum of flows on each edge is bounded by the edge capacity, the sum of in-network process done at each vertex is bounded by the vertex capacity, and the processing done at all vertices for a flow should be equal to flow size and the processing has to be carried out by the flow.
 
 Network design problems involve finding a network with a minimum cost that satisfies various properties, often related to routing and flow feasibility. The network design problem in this model is: for a multi-source and multi-sink flow demand, and a fixed amount of budget to install the processing capacities in the vertices, what is the optimal way to allocate them such that the flow pattern satisfies all the constraints.
 
