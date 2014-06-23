@@ -68,7 +68,7 @@ We consider two common types of task relationships: serial and parallel. Serial 
 For $N$ serial tasks, we have $C^n(v); n\in\{1\dots N\}$ for $N$ different processing capacities. In optimization formulation 2.2, we can think of two different types of flows, pre-processed and post-processed, and in this model we have $N+1$ types of flows: pre-$n$-post-$(n-1)$ processed where $ n\in\{1\dots N\}$ and  fully processed flows. We can extend formulation 2.2 by adding $N-1$ process demands, in particular for 2.2c we extend to N different types of processing, $p_i^n= \sum\limits_{in} w_i^n(e) - \sum\limits_{out} w_i^n(e)$. Besides the same capacity and flow relation constraints, we also need $w_i^n(e) \geq w_i^{n-1}(e)$ where it reflects the sequence. The complexity of this formulation increases in a linear relation to the number of tasks $N$.
 \begin{figure}
  \includegraphics[width=\linewidth]{task.png}
- \caption{Up: serial tasks, Down: parallel tasks; a,b,c,d represents four different tasks and each link represents one dependency}
+ \caption{Up: serial tasks, Down: parallel tasks; a,b,c represents three different tasks and each link represents one dependency}
 \end{figure}
 
 
