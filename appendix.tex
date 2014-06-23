@@ -19,7 +19,7 @@ Rewrite the two optimization problem:
 \end{align}
 \end{subequations}
   \end{minipage}
-\hspace{0.1cm}
+\hspace{0cm}
 \begin{minipage}[t]{0.50\textwidth}
 \textit{Edge-based formulation:}
   \begin{subequations}
@@ -75,7 +75,7 @@ Build a new graph $G'$: all vertices $V$, and for $\forall e\in E $, if $f(e) >0
 We prove two aspects for this algorithm: 
 \begin{enumerate}
   \item {there is $p(v) >0$, we can always find a path with non-zero flow}
-   \item {after allocation for one path, constraints are held for the reduced graph} 
+   \item {constraints are held for the reduced graph} 
 \newline
 \end{enumerate}
 Here we introduce an variable $\rho$ for each edge e where $\rho_{e} = \frac{ w(e)}{f(e)}$. We divide flow into two types, processed and unprocessed $f^1$ and $f^2$; $f^1=w$ and $f^2=f-w$, we can translate $\rho = \frac{ f^1} {f^1+f^2 }$.
