@@ -3,6 +3,8 @@
 \usepackage{authblk}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{framed,multicol}
+\usepackage{algorithm2e}
 
 \usepackage{ltexpprt} 
 
@@ -60,26 +62,15 @@ a directed graph $G(V,E)$ where each edge $e\in E$ has an edge bandwidth $B(e)$,
 
 
 
-\section{Processing Capacity Placement in fractional manner}
-We formulate a generalized linear programming model in this problem in an edge based formulation. Notations: $C(v),B(e)$ represents the processing and edge capacity at node $v$ and edge $e$, $f_i(e)$ represents the flow size for each source-sink pair on edge $e$, $w_i(e)$ represents process demand for flow i carried out at edge $e$, $f(C(v))$ is an concave cost function of $C(v)$: 
+\input{Section2.tex}
 
-\begin{subequations}
-\begin{align}
-\text{Minimize:}&\sum\limits_v f(C(v))\\
-\text{Subject to:}&\forall v \in V-\{s, t\}, \forall i, \sum\limits_{in}  f_i(e)=  \sum\limits_{out} f_i(e);\\
-&\forall e, \sum\limits_{i} f_{i}(e)\leq B(e);\\
-&\forall e,\forall  i,0 \leq w_i(e) \leq f_i(e),\\
-&\forall v,\forall  i, 0\leq \sum\limits_{in } w_i(e) - \sum\limits_{out} w_i(e)   \leq{C(v)}.\\
-%&\forall i, \sum\limits_v f_i(s, v) = r_i; \\
-&\forall  i; \forall (s, v), w_i = f_i\;\&\; \forall (v,t), w_i =0.
-\end{align}
-\end{subequations}
-
-
+\input{DesignProblem.tex}
+\input{Conclusion.tex}
 
 
 \bibliographystyle{acm}
 \bibliography{references}
 
-\appendix
+\input{appendix.tex}
+
 \end{document}

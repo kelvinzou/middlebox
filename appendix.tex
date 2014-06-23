@@ -1,0 +1,177 @@
+\appendix
+\section{Proof for edge based LP for section2.1}
+
+Here we use a max flow formulation for a single source and single sink flow to show the equivalence of formulation, we can simply extend this to min-utilization function based formulation for multi-source, multi-sink flows. 
+
+Rewrite the two optimization problem:
+
+
+\begin{minipage}[t]{0.45\textwidth}
+\textit{Path-based formulation:}
+  \begin{subequations}
+\begin{align}
+\text{Max:}& \sum\limits_{pi\in P}f(\pi) \\  \nonumber
+\text{Subject } &\text{to:} \\
+\forall \pi; &\sum \limits_{e\in \pi} p(\pi, e) = f(\pi)\\
+\forall e;& \sum \limits_{\pi\in P:e\in \pi} f(\pi) \leq B(e)\\
+\forall v; \sum \limits_{\pi\in P} &\sum \limits_{ e\equiv (u,v)\in \pi} p(\pi, e) \leq C(v)\\
+\forall \pi,&\forall e;p(\pi,e) \geq 0
+\end{align}
+\end{subequations}
+  \end{minipage}
+\hspace{0.1cm}
+\begin{minipage}[t]{0.50\textwidth}
+\textit{Edge-based formulation:}
+  \begin{subequations}
+\begin{align}
+\text{Max:}&\sum \limits_{e=(s,v)} f(e)  \\ \nonumber
+\text{Subject } &\text{to:}\\
+\forall v \not= s,t;& \sum\limits_{in}  f(e)=  \sum\limits_{out} f(e)\\
+\forall v ;p (v) =&  \sum\limits_{in} w (e) - \sum\limits_{out} w (e) \\
+\forall e;  f(e)& \leq B(e)\\
+\forall v;  p(v)& \leq C(v)\\
+\forall (s-v);& w (e)= f (e)\\
+\forall (v-t);& w (e)= 0\\
+\forall e;w (e),& f (e)-w (e), p (v) \geq 0
+\end{align}
+\end{subequations}
+\end{minipage}
+
+From the formulation we show that.
+\begin{itemize}
+  \item {\emph{Direction A:} If there is a path-based LP solution, we have an edge-based solution.}
+  \item {\emph{Direction B:} If there is an edge-based LP solution, we have a path-based solution.}
+\end{itemize}
+
+For \emph{Direction A:}
+\begin{proof}
+we show that we can easily convert path-based solution to edge-based solution and the constraints in edge-based formulation hold.
+
+For each edge e, $f(e) =\sum\limits_{\pi\in P: e\in \pi} f(\pi)$.
+
+For each vertex v, $w(e) = \sum\limits_{\pi\in P: e'\in \pi, e' \leq e} p(\pi, e')$ ($e'\leq e$ means e' is topologically at or after e on the path $\pi$).(A.2c)
+
+Flow conservation holds $ \sum\limits_{(u,v)\in E} f(e) $=$ \sum\limits_{\pi\in P, v\in \pi} f(\pi)$ = $\sum\limits_{(v,w )\in E} f(e)$.(A.2b)
+
+Constraints in terms of $B(e), C(v)$ also hold. (A2d,2e)
+
+Relations between $w(e), f(e)$ also hold: $w(e)= \sum\limits_{\pi\in P: e'\in \pi, e' \leq e} p(\pi, e')\leq \sum\limits_{\pi\in P: e\in \pi} f(\pi) = f(e) $, and $w(s,v)=f(s,v)$ and $w(v,t)=0$ are special cases.(A.2f,2g,2h)
+
+\end{proof}
+
+For {\emph{Direction B}}.
+
+That is, if we have a solution which tells us that if we can assign certain amount of flow and processing 
+demand at each edge, we are able to construct paths with a certain amount of flow 
+and corresponding processing demand and process workload at every/some node along the path in a certain way.
+
+Setup:
+A directed graph $G(V,E)$. We have a solution of from edge-based LP, with 
+f(e) is the flow for each edge and w(e) is workload demand at that edge. We also have processing work at each node p(v) and it is simply $p(v) = 
+\sum\limits_{e \in E_{u, v} }w_(e) - \sum\limits_{e \in E_{v, w} }w_(e)  $.
+
+Build a new graph $G'$: all vertices $V$, and for $\forall e\in E $, if $f(e) >0$, we put a direct edge $e$ in the graph. Note we might have cycles (or even two flows with opposite directions if the two vertices are connected bidirectionally) at the same edge. First we run algorithm [Path Construction] to get one path to allocate flow. For each flow path, we run flow allocation and update the graph, we exhaustively do it until we place all flow and workload demand, this step is essentially captured in algorithm [Flow Placement]. 
+
+We prove two aspects for this algorithm: 
+\begin{enumerate}
+  \item {there is $p(v) >0$, we can always find a path with non-zero flow}
+   \item {after allocation for one path, constraints are held for the reduced graph} 
+\newline
+\end{enumerate}
+Here we introduce an variable $\rho$ for each edge e where $\rho_{e} = \frac{ w(e)}{f(e)}$. We divide flow into two types, processed and unprocessed $f^1$ and $f^2$; $f^1=w$ and $f^2=f-w$, we can translate $\rho = \frac{ f^1} {f^1+f^2 }$.
+
+\begin{lemma} If there is a cycle in the path composition, we can achieve in the cycle there are two different edges where one has $min(f^2) = 0$ and one has $min(f^1)=0$. 
+\end{lemma} 
+\begin{proof} it is similar to flow cancellation in a simple graph model: 
+
+1. for e=(u,v) whereas $min(f^1) >0$, we can simply cancel the unprocessed flow demand by small amount $\epsilon$, and it does not affect the outcome of the flow outside the loop, while we can reduce the flow load and workload demand in the loop without side effect. 
+
+2. for e=(u,v) whereas $min(f^2)>0$, we can cancel the processed flow demand by small amount $\epsilon$, and this does not affect the outcome of the flow outside of the loop while we can reduce the flow load in the loop without side effect. 
+
+The intuition behind this is that loop exists due to that some flow needs to borrow some processing capacity from some node(s), so it would ``detour" a flow fully unprocessed and get back the flow fully processed. 
+\end{proof}
+
+\begin{lemma}
+If there is a cycle, we always have at least one edge with $\rho =1$ and one edge with $\rho =0$.
+\end{lemma}
+\begin{proof}
+ Here since $f^2=0$ for at least one edge based on Lemma A.1, we have $\rho=1$ for the edge. The same way to get $\rho_{out}=0$ since $f^1=0$ for at least one edge. 
+\end{proof}
+\begin{algorithm}  \label{path construction}
+\SetAlgoLined
+ \KwData{$G(V, E)$, $ w(e)$, $f(e)$ for $\forall e \in E$ and $p(v)$ for $\forall v \in V$ }
+ \KwResult{path $\pi$ }
+\BlankLine
+pick a node v with $p(v)>0$\;
+\emph{//Construct path from $s\rightarrow v$ and $v\rightarrow t$}\;
+From v run backward traversal, pick an incoming directed edge with $ max( \rho_{in} )  $ where $\rho_{in} \equiv \frac{ w(e_{in})}{f(e_{in})}$\;
+From v run forward traversal, pick an outgoing directed edge with $ min(\rho_{out} ) $ where $\rho_{out} \equiv \frac{ w(e_{out})}{f(e_{out})} $\;
+\caption{Path Construction}
+\end{algorithm}
+
+\begin{algorithm} \label{flow placement}
+\SetAlgoLined
+ \KwData{$G(V, E)$, $ w(e)$, $f(e)$ for $\forall e \in E$ and $p(v)$ for $\forall v \in V$ }
+ \KwResult{$f(\pi)$, $p(\pi,e)$ (in which $e\in\pi$) }
+\BlankLine
+\While{$\exists v; p(v) >0$}
+{
+find a path $\pi = <e_1, \dots, e_k> $ from [Path Construction]\;
+$f(\pi) = min{f((e_i)},\; i\in <1,\dots,k>$\;
+	$p(\pi)=0$\;
+	$p(\pi, e_k)=0$\;
+	\BlankLine
+ 	\For{$i \leftarrow (k-1)$ \KwTo $1$}
+	{
+	(u,v)=$e_i$\;
+	\emph{//$\delta_i$: workload processed at node i}\;
+	$\delta_i = min( p(v), w(e_{i}) , f(\pi) -p(\pi))$\;
+	\emph{//Update workload}\;
+	$p(\pi, e_i) =\delta_i$\;
+	$ p(\pi)= p(\pi)+ \delta_i$\;
+	$w(e_i) = w(e_i)- p(\pi)$\;
+	$p(v) = p(v)-\delta_i$\;
+	$C(v) = C(v) - \delta_i$;
+	}
+	\BlankLine
+	$f(\pi) = p(\pi) $
+	\BlankLine
+	\emph{//Update flow}\;
+	\For{$i \leftarrow 1 $ \KwTo $k$}{
+	$f(e_i)=f(e_i)-f(\pi)$\;
+	$B(e_i)=B(e_i)-f(\pi)$\;
+	}
+	
+}
+\caption{Flow Placement}
+\end{algorithm}
+\begin{lemma}  [Path Construction] Algorithm \ref{path construction} can always generate path with non-zero flow from source to sink if there exists any $v$ where $p(v) >0$. \end{lemma}
+\begin{proof}
+\textit{First}, from Lemma A.2, the path cannot loop a cycle twice from [Path Construction]. Since downstream traversal keeps picking $\min \rho$ while upstreaming traversal keeps picking $\max \rho$, so we never pick the same edge twice. Since $p(v)>0$ so at the same node there must be one upstream edge with $\rho>0$ and downstream edge with $\rho<1$. There may be cycles in the traversal, however since the same edge is never picked twice so there is no loop. The path consists of two DAGs, one is from source to $v$ and one is from $v$ to sink, the path is a DAG as well.
+
+\textit{Second} we need to show for a certain path $\exists e; w(\pi, e)>0$. Since $\delta = min( p(v),p(e_{i}),f(\pi) -p(\pi,e_{i+1}))$; at node v where $p(v)>0$; we have $p(e_i)>0$ because $[\rho_{in} =\frac{p(e_{in})}{f(e_{in})} ]>\rho_{out}\geq 0$. If $\delta=0$ we have $ f(\pi) -p(\pi,e_{i+1}) =0$, which lead to $ p(\pi, e_{i+1})>0$, otherwise $ \delta>0; p(\pi, e_i) = [ \delta+p(\pi, e_{i+1} )]>0$.
+
+\textit{Finally} since $p(\pi, e)$ is using backward greedy algorithm, our algorithm by design conserve the flow and ensures workload demand is decreasing.
+\end{proof}
+
+\begin{lemma} [Flow Placement] Algorithm \ref{flow placement} conserves all the constraints for the reduced graph.
+\end{lemma}
+\begin{proof}
+we show that all the constraints are satisfied:
+
+for A.2b:
+$\forall v \in \pi; \sum\limits_{in}  f(e) - \sum\limits_{out} f(e)=\sum\limits_{in \not=e_i}  f(e) - \sum\limits_{out\not=e_{i+1} } f(e) +[f(e_i)-f(\pi) ] - [f(e_{i+1}) -f(\pi)] = 0 $
+
+A.2d:
+$\forall e \in \pi; f(e) = f(e)-f(\pi) \leq B(e)-f(\pi)=B^{new}(e)$ 
+
+A.2e: 
+$\forall v \in \pi; p(v) - \delta \leq C(v) - \delta=C^{new}(v)  $
+
+A.2f and A.2g are ensured by greedy algorithm, $p(\pi, e_1) = f(\pi) $ and $p(\pi, e_k)=0$.
+
+A.2h constraints are satisfied by numerical relations.
+\end{proof}
+So this proves \emph{Direction B}, and therefore the two formulations are equivalent. 
+
+

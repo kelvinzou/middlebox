@@ -19,3 +19,12 @@ Yonatan
 2. Work on directed version of problem (circulation-based?)
 3. Inapproximable variants
 4. Check dag-ordered case
+
+
+
+
+1. Intro
+2. Problem definition and routing solution (side by side)
+3. Design problem: fractional
+4. Integer placement problem
+5. 
