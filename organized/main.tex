@@ -1,0 +1,40 @@
+\documentclass[11pt]{article}  
+\usepackage[margin=1in]{geometry}
+\usepackage{authblk}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{framed,multicol}
+\usepackage{algorithm2e}
+\usepackage{soul}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{ltexpprt} 
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+\usepackage[nameinlink]{cleveref}
+
+
+\input{macros.tex}
+
+
+\title{Multi-Commodity Flow with In-Network Processing}
+\author{Moses Charikar, Yonatan Naamad, Jennifer Rexford, and X. Kelvin Zou\\
+Department of Computer Science, Princeton University\\
+\texttt{\{moses,ynaamad,jrex,xuanz\}@cs.princeton.edu}}
+\date{}
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\input{0-Abstract.tex}
+\newpage
+\input{1-Introduction.tex}
+\input{2-Routing.tex}
+\input{3-Network_Design.tex}
+\input{4-Conclusion.tex}
+\bibliographystyle{acm}
+\input{references.tex}
+% \bibliography{references}
+
+\input{A-Appendix.tex}
+
+\end{document}

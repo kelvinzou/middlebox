@@ -1,0 +1,34 @@
+
+\section{Introduction}
+\label{sec:intro}
+%%%
+%%% Middleboxes are important
+%%%
+\subsection{Background}
+In addition to delivering data efficiently, today's computer networks often perform services on the traffic in flight to enhance security, privacy, or performance, or provide new features.  Network administrators frequently install so-called ``middleboxes'' such as firewalls, network address translators, server load balancers, Web caches, video transcoders, and devices that compress or encrypt the traffic.  In fact, many networks have as many middleboxes as they do underlying routers or switches.  Often a single conversation, or \emph{connection}, must traverse multiple middleboxes, and different connections may go through different sequences of middleboxes.  For example, while Web traffic may go through a firewall followed by a server load balancer, video traffic may simply go through a transcoder.  In some cases, the traffic volume is so high that an organization needs to run multiple instances of the same middlebox to keep up with the demand.  Deciding how many middleboxes to run, where to place them, and how to direct traffic through them is a major challenge facing network administrators.
+
+%%%
+%%% Dedicated appliances stink
+%%%
+Until recently, each middlebox was a dedicated appliance, consisting of both software and hardware.  Administrators tended to install these appliances at critical locations that naturally see most of the traffic, such as the gateway connecting a campus or company to the rest of the Internet.  A network could easily have a long chain of these appliances at one location, forcing all connections to traverse every appliance---whether they need all of the services or not.  In addition, placing middleboxes only at the gateway does not serve the organization's many \emph{internal} connections, unless the internal traffic is routed circuitously through the gateway.
+%
+%%%
+%%% Network Function Virtualization
+%%%
+Over the last few years, middleboxes are increasingly \emph{virtualized}, with the software service separate from the physical hardware.  Middleboxes now run as virtual machines that can easily spin up (or down) on any physical server, as needed.  This has led to a growing interest in good algorithms that optimize the (i) \emph{placement} of middleboxes over a pool of server resources, (ii) \emph{steering} of traffic through a suitable sequence of middleboxes based on a high-level policy, and (iii) \emph{routing} of the traffic between the servers over efficient network paths~\cite{SIMPLE2013}.
+
+%%%
+%%% Combining the optimization problems
+%%%
+\subsection{The General Problem}
+Rather than solving these three optimization problems separately, we introduce---and solve---a joint optimization problem.  Since server resources are fungible, we argue that each compute node could subdivide its resources arbitrarily across any of the middlebox functions, as needed.  That is, the \emph{placement} problem is more naturally a question of what fraction of each node's computational (or memory) resources to allocate to each middlebox function.  Similarly, each connection can have its middlebox processing performed on any node, or set of nodes, that have sufficient resources.  That is, the \emph{steering} problem is more naturally a question of how to decide which nodes should devote a share of its processing resources to a particular portion of the traffic.  Hence, the joint optimization problem ultimately devolves to a new kind of \emph{routing} problem, where we must compute paths through the network based on both the bandwidth and processing requirements of the traffic between each source-sink pair.  That is, a flow from source to sink must be allocated (i) a certain amount of bandwidth on every link in its path and (ii) a total amount of computation across all of the nodes in its path.
+
+
+% \subsection{The General Problem}
+We can abstract the above problem--flow with in-network processing problem in the following way: there is a flow demand with multi-sources and multi-sinks, and each flow requires a certain amount of in-network processing. The in-network processing required for a flow is proportional to the flow size and without losing generality, we assume one unit of flow requires one unit of processing. For a flow from a source to a sink, we assume it is an aggregate flow of many connections so the routing and in-network processing for a flow are both divisible. In this model there are two types of constraints: edge capacity and vertex capacity, which represents bandwidth and node computational capacity. A feasible flow pattern satisfies: the sum of flows on each edge is bounded by the edge capacity, the sum of in-network processing done at each vertex is bounded by the vertex capacity, and the processing done at all vertices for a flow should be equal to flow size and the processing has to be carried out by the flow.
+
+Our model is a superset of standard multi-commodity flow model\cite{MCF}, that is, if we can solve this problem, we can naturally solve multi-commodity flow problem: simply assigning each vertex with an infinite capacity it becomes an MCF problem. However our problem is also very different from standard multicommodity flow varieties, for example in our model loops can happen, and actually quite often in real settings as flows are ``detoured'' to be processed. 
+
+
+\subsection{Outline of this paper}
+We separate the core of this paper into two sections. In \Cref{sec:routing}, we discuss the \textit{\checkthis{processed packet routing}} class of problems, in which we discuss how to feasibly route packets in a fixed network while optimizing various objective functions. We also use this section to discuss how to handle the case where the processing alters the size of the flow, affecting how much capacity is required of edges following the processing vertex, and when the act of processing requires multiple steps to be handled by various nodes. In \Cref{sec:networkdesign}, we discuss the \textit{\checkthis{processing power allocation}} problem, in which the goal is to purchase processing capacity to place at certain nodes so \checkthis{maximize or minimize something}.

@@ -1,0 +1,14 @@
+\begin{thebibliography}{1}
+
+\bibitem{MCF}
+{\sc Ford, L.~R., and Fulkerson, D.~R.}
+\newblock A suggested computation for maximal multi-commodity network flows.
+\newblock {\em Management Science 5}, 1 (1958), 97--101.
+
+\bibitem{SIMPLE2013}
+{\sc Qazi, Z.~A., Tu, C.-C., Chiang, L., Miao, R., Sekar, V., and Yu, M.}
+\newblock Simple-fying middlebox policy enforcement using sdn.
+\newblock In {\em Proceedings of the ACM SIGCOMM 2013 Conference on SIGCOMM\/}
+  (2013), SIGCOMM '13, ACM, pp.~27--38.
+
+\end{thebibliography}
