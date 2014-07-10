@@ -1,6 +1,6 @@
 \appendix
-\section{Apppendix}
-\subsection{Proof for equivalence between two LPs section2.1} \label{subsec:lppaths}
+\section{Appendix}
+\subsection{Proof for equivalence between two LPs section 2.1} \label{subsec:lppaths}
 Proof sketch: we first show that we can compose an \emph{edge-based} solution based on a \emph{walk-based} solution and vice versa for a single flow, and then show that we can iteratively place multi-commodity flows. 
 \begin{enumerate}
 \item show \emph{Direction A:} If there is a \emph{walk-based} LP solution, there is an \emph{edge-based} solution.

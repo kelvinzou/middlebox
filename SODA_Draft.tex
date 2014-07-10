@@ -1,12 +1,32 @@
 \documentclass[11pt]{article}  
 \usepackage[margin=1in]{geometry}
 \usepackage{authblk}
+\usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{framed,multicol}
 \usepackage{algorithm2e}
+\usepackage{soul}
+\usepackage[usenames, dvipsnames]{color}
 
 \usepackage{ltexpprt} 
+
+\newcommand{\hlc}[2][yellow]{ {\sethlcolor{#1} \hl{#2}} }
+
+\newcommand{\checkthis}[1]{{{\sethlcolor{Rhodamine}\hl{#1}}\xspace}}
+\newcommand{\newtext}[1]{{\textul{#1}\xspace}}
+\newcommand{\comment}[2][]{{\sethlcolor{green} \hl{#1}} {\color{JungleGreen} \it #2}\xspace}
+\newcommand{\positiveinteger}{\ensuremath{\mathbb{Z}^+}\xspace}
+\newcommand{\nonnegativeinteger}{\ensuremath{\mathbb{N}}\xspace}
+\newcommand{\positivereal}{\ensuremath{\mathbb{R}^+}\xspace}
+%\newcommand{\nonnegativereal}{\ensuremath{\mathbb{R}^+ \cup \{0\}}\xspace}
+\newcommand{\nonnegativereal}{{\color{red} {\ensuremath{\mathbb{R}^+}}}}
+
+\soulregister{\checkthis}{1}
+\soulregister{\newtext}{1}
+\soulregister{\comment}{2}
+
 
 \title{Multi-Commodity Flow with In-Network Processing}
 \author{Moses Charikar, Yonatan Naamad, Jennifer Rexford, and X. Kelvin Zou\\

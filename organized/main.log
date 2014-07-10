@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.6.2)  7 JUL 2014 16:56
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.6.2)  10 JUL 2014 13:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -666,12 +666,12 @@ Missing character: There is no “ in font cmr10!
 (name{section.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2 \section{Apppendix}
-                       pdfTeX warning (ext4): destination with the same identif
-ier (name{subsection.1.1}) has been already used, duplicate ignored
+l.2 \section{Appendix}
+                      pdfTeX warning (ext4): destination with the same identifi
+er (name{subsection.1.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3 ...for equivalence between two LPs section2.1}
+l.3 ...or equivalence between two LPs section 2.1}
                                                    \label{subsec:lppaths}
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
@@ -711,9 +711,15 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 40.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 40.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 40.
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: F729635FAD5B9B1B43E9191609A0FD4D;1477.
 
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: F729635FAD5B9B1B43E9191609A0FD4D;1477
+(rerunfilecheck)             After:  6A30F0CD7D16D8057E90128D83E01368;1477.
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -752,7 +758,7 @@ msy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (14 pages, 431081 bytes).
+Output written on main.pdf (14 pages, 431074 bytes).
 PDF statistics:
  390 PDF objects out of 1000 (max. 8388607)
  321 compressed objects within 4 object streams
