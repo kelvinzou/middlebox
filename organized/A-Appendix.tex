@@ -1,6 +1,6 @@
 \appendix
 \section{Appendix}
-\subsection{Proof for equivalence between two LPs section 2.1} \label{subsec:lppaths}
+\subsection{Proof for equivalence between two LPs \autoref{subsec:basicproblem}} \label{subsec:lppaths}
 Proof sketch: we first show that we can compose an \emph{edge-based} solution based on a \emph{walk-based} solution and vice versa for a single flow, and then show that we can iteratively place multi-commodity flows. 
 \begin{enumerate}
 \item show \emph{Direction A:} If there is a \emph{walk-based} LP solution, there is an \emph{edge-based} solution.
@@ -133,7 +133,7 @@ A.2b, A.2c, A.2f and A.2g  hold for all the flows left after one flow is removed
 A.2d: $\forall i,\forall e;  \sum\limits_{l=i}^K f_l(e) - f_i\leq B(e) - f_i(e)$;
 A.2e: $\forall i,\forall v;  \sum\limits_{l=i}^K p_l(v) -p_i(v)\leq C(v) - p_i(v)$.
 
-\subsection{Proof for formulation about flow size change in section2.1} \label{subsec:lppaths}
+\subsection{Proof for formulation about flow size change in \autoref{subsec:basicproblem}} \label{subsec:lppaths}
 \begin{proof}
 The algorithm of constructing walks for edge-based LP w.r.t. flow size change is very similar to the approach above. However we need to ``restore'' the processed flow to ``raw'' flow size before constructing the walks. In particular, using the $f^1, f^2$ notation to represent pre and post processed flows, we restore $f^2$ to $\hat{f}^2$ with the multiplicative factor $r$, $ \forall e, \hat{f}^2(e)=f^2(e)/r$. Everything is the same as previous algorithm after this step. Once we get $f^1$ and $\hat{f}^2$, we simply convert back to $f^2$ via $f^2= \hat{f}^2 \cdot r$.
 \end{proof}
