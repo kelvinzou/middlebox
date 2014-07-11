@@ -62,8 +62,8 @@ $\rho$ has the following property: if there is a cycle for unity flow $f$, there
   \SetAlgoLined\DontPrintSemicolon
    \KwData{$G'(V, E)$, $ w(e)$, $f(e)$ for $\forall e \in E$ and $p(v)$ for $\forall v \in V$ }
 \KwResult{$f(\pi)$, $p(\pi,v)$ where $v\in\pi$ }
-\SetKwFunction{walk}{Walk Construction} \label{walk construction}
-  \SetKwFunction{flow}{Flow Placement} \label{flow placement}
+\SetKwFunction{walk}{Walk Construction}  
+  \SetKwFunction{flow}{Flow Placement}  
   \SetKwProg{myalg}{Algorithm}{}{}
   \myalg{\walk{}}  {
 \emph{//Construct walk from $s\rightarrow v$ and $v\rightarrow t$}\;
@@ -93,11 +93,11 @@ $p_\pi = \min\{f^1(e^a), f^2(e^b), p(v)\},\; e^a\in <e_1,\dots, u\rightarrow v>,
 	}
 }
 }
-\caption{Walk Decomposition}
+\caption{Walk Decomposition}\label{cap:algorithm1}
 \end{algorithm}
 
 
-\begin{lemma}  [Walk Construction] Algorithm 1 can always generate a walk with non-zero flow from source to sink if there exists any $v$ where $p(v) >0$, and the algorithm can converge at $O(V^2)$ \end{lemma}
+\begin{lemma}  [Walk Construction] \autoref{cap:algorithm1} can always generate a walk with non-zero flow from source to sink if there exists any $v$ where $p(v) >0$, and the algorithm can converge at $O(V^2)$ \end{lemma}
 \begin{proof}
 \textit{First}, from Lemma A.2, the walk cannot loop a cycle twice from [Walk Construction]. Since downstream traversal keeps picking $\min \rho$ while upstreaming traversal keeps picking $\max \rho$, so we never pick the same edge twice. Since $p(v)>0$ so at the same node there must be one upstream edge with $\rho>0$ and downstream edge with $\rho<1$. Since the same edge is never picked twice so there is no loop in terms of $f^1$ and $f^2$. The walk consists of two DAGs, one is from source to $v$ and one is from $v$ to sink, the walk is a DAG as well.
 
@@ -107,7 +107,7 @@ For a single flow, after each iteration, we either take out one edge or one vert
 \end{proof}
 
 
-\begin{lemma} [Flow Placement] Algorithm 1 conserves all the constraints for the reduced graph.
+\begin{lemma} [Flow Placement] \autoref{cap:algorithm1} conserves all the constraints for the reduced graph.
 \end{lemma}
 \begin{proof}
 we show that all the constraints are satisfied:
